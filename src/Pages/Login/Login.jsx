@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { signIn } from 'aws-amplify/auth'; // Correct import
+import { Amplify, Auth } from 'aws-amplify';
+import awsmobile from '../../aws-exports'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
+
+Amplify.configure(awsmobile);
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -14,11 +17,11 @@ const Login = () => {
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
-            const user = await signIn(email, password);
+            const user = await Auth.signIn(email, password); 
             console.log('Logged in user:', user);
-            navigate('/dashboard'); // Navigate to dashboard upon successful login
+            navigate('/dashboard');
         } catch (error) {
-            console.error('Error signing in', error);
+            console.error('Error signing in:', error);
             setError('Failed to sign in. Please check your credentials.');
         }
     };
