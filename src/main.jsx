@@ -7,7 +7,7 @@ import './index.css';
 import App from './App.jsx';
 
 // Configure Amplify with the imported configuration
-Amplify.configure(awsmobile);
+// Amplify.configure(awsmobile);
 
 const root = createRoot(document.getElementById('root'));
 root.render(
